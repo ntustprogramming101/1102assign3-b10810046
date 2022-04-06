@@ -45,6 +45,8 @@ int soilY;
 
 //控制土撥鼠可不可以往下
 int ghDown ; 
+//控制土壤往上
+int soilUP;
 
 //土撥鼠生命
 PImage life;
@@ -134,7 +136,7 @@ void draw() {
     // Grass
     fill(124, 204, 25);
     noStroke();
-    rect(0, 160 - GRASS_HEIGHT, width, GRASS_HEIGHT);
+    rect(0, 160-soilMove - GRASS_HEIGHT, width, GRASS_HEIGHT);
 
     // Soil - REPLACE THIS PART WITH YOUR LOOP CODE!
     //顯示土壤
@@ -200,11 +202,13 @@ void draw() {
       case down:
         time++;
         image(groundhogDown, ghX, ghY, 80, 80);
+        soilMove += (ghSpeed/15.0+1)*soilUP;
 
         ghY += (ghSpeed/15.0+1)*ghDown;
 
         if (time ==15) {
           ghgood = idle;
+          soilMove = round(soilMove/80.0)*80;
         }
         break;
       case right:
@@ -292,10 +296,11 @@ void keyPressed() {
       time = 0;
       ghgood = down;
       if (soilMove < 20*soilSize) { 
-        soilMove += soilSize;
         ghDown = 0;
+        soilUP = 1;
       } else {
         ghDown = 1;
+        soilUP = 0;
       }
       break;
 
