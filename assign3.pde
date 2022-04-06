@@ -37,7 +37,7 @@ PImage []imgSoil;
 int soilSize = 80;
 
 //土壤位置控制
-int soilMove = 0;
+float soilMove = 0.0;
 
 //土壤位置陣列
 int soilX;
@@ -202,7 +202,7 @@ void draw() {
       case down:
         time++;
         image(groundhogDown, ghX, ghY, 80, 80);
-        soilMove += (ghSpeed/15.0+1)*soilUP;
+        soilMove += (ghSpeed/15.0+0)*soilUP;
 
         ghY += (ghSpeed/15.0+1)*ghDown;
 
