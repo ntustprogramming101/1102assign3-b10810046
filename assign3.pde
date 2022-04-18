@@ -51,6 +51,7 @@ int soilUP;
 //土撥鼠生命
 PImage life;
 
+
 //石頭
 PImage stone1, stone2;
 
@@ -85,6 +86,7 @@ void setup() {
   ghY = 1*soilSize;
   //土撥鼠狀態
   ghgood = idle;
+  playerHealth = 2;
 }
 
 void draw() {
@@ -259,6 +261,9 @@ void draw() {
       int lifeSP = i*70;
       image (life, 10+lifeSP, 10);
     }
+    if(playerHealth == 0){
+       gameState = GAME_OVER;
+    }
     break;
 
   case GAME_OVER: // Gameover Screen
@@ -271,6 +276,7 @@ void draw() {
 
       image(restartHovered, START_BUTTON_X, START_BUTTON_Y);
       if (mousePressed) {
+        playerHealth = 2;
         gameState = GAME_RUN;
         mousePressed = false;
         // Remember to initialize the game here!
